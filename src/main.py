@@ -1,35 +1,28 @@
 import os
-from shutil import rmtree, copy
+import shutil
+from copystatic import copy_files_recursive
+from generate_page import generate_page
+
+dir_path_static = "./static"
+dir_path_public = "./public"
+dir_path_content = "./content"
+template_path = "./template.html"
+
 
 def main():
-  root = "."
-  static_path = os.path.join(root, "static")
-  public_path = os.path.join(root, "public")
+    print("Deleting public directory...")
+    if os.path.exists(dir_path_public):
+        shutil.rmtree(dir_path_public)
 
-  if os.path.exists(public_path):
-    rmtree(public_path)
+    print("Copying static files to public directory...")
+    copy_files_recursive(dir_path_static, dir_path_public)
 
-  os.mkdir(public_path)
-
-  def copy_dir(path = ""):
-    current_dir = os.path.join(static_path, path)
-    new_dir = os.path.join(public_path, path)
-
-    cd = os.listdir(current_dir)
-
-    for item in cd:
-      item_path = os.path.join(current_dir, item)
-      copy_to = os.path.join(new_dir, item)
-
-      if os.path.isfile(item_path):
-        copy(item_path, new_dir)
-      else:
-        if not os.path.exists(copy_to):
-          os.mkdir(copy_to)
-
-        copy_dir(os.path.join(path, item))
-
-  copy_dir()
+    print("Generating page...")
+    generate_page(
+        os.path.join(dir_path_content, "index.md"),
+        template_path,
+        os.path.join(dir_path_public, "index.html"),
+    )
 
 
 if __name__ == "__main__":

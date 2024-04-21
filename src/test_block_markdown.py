@@ -2,7 +2,7 @@ import unittest
 
 from block_markdown import markdown_to_blocks, block_to_block_type, BlockTypes
 
-class TestBMarkdownNode(unittest.TestCase):
+class TestBlockMarkdownNode(unittest.TestCase):
 
   def test_markdown_to_blocks(self):
     text = """

@@ -30,7 +30,7 @@ def markdown_to_html(markdown):
       root_children.append(ParentNode("p", children=inline_elements))
 
     if type == BlockTypes.UNORDERED_LIST:
-      list_items = list(map(lambda item: LeafNode("li", value=item.strip("* ")), block.split("\n")))
+      list_items = list(map(lambda item: LeafNode("li", value=item.strip("*- ")), block.split("\n")))
 
       root_children.append(ParentNode("ul", children=list_items))
 
@@ -38,7 +38,7 @@ def markdown_to_html(markdown):
       list_items = list()
 
       for block in sorted(block.split("\n")):
-        _, text = block.split(" ")
+        _, text = block.split(". ", 1)
         list_items.append(LeafNode("li", value=text))
 
       root_children.append(ParentNode("ol", children=list_items))
