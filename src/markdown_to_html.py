@@ -17,7 +17,9 @@ def markdown_to_html(markdown):
       headings = block.split("\n")
       for heading in headings:
         header_arr = heading.split(" ")
-        root_children.append(LeafNode(f"h{len(header_arr[0])}", value=" ".join(header_arr[1:])))
+        parsed_header_text = text_to_text_nodes(" ".join(header_arr[1:]))
+        content = list(map(text_node_to_html_node, parsed_header_text))
+        root_children.append(ParentNode(f"h{len(header_arr[0])}", children=content))
 
     if type == BlockTypes.QUOTE:
       root_children.append(LeafNode("blockquote", value="".join(map(lambda s: s.strip("> "), block.split("\n")))))
