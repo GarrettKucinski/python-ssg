@@ -1,5 +1,5 @@
 import re
-from textnode import TextNode, TextTypes
+from .textnode import TextNode, TextTypes
 
 def extract_markdown_images(text):
   return re.findall(r"!\[(.*?)\]\((.*?)\)", text)

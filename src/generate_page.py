@@ -1,5 +1,5 @@
 from pathlib import Path
-from markdown_to_html import markdown_to_html
+from .markdown_to_html import markdown_to_html
 
 def extract_page_title(markdown = "markdown not provided"):
   blocks = markdown.strip().split("\n")

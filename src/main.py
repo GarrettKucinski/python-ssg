@@ -1,7 +1,7 @@
 import os
 import shutil
-from copystatic import copy_files_recursive
-from generate_page import generate_page
+from .copystatic import copy_files_recursive
+from .generate_page import generate_page
 
 dir_path_static = "./static"
 dir_path_public = "./public"
